@@ -1,0 +1,16 @@
+Source: php-phpdocumentor-graphviz
+Section: php
+Priority: optional
+Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
+Build-Depends: debhelper-compat (= 13), jq
+Standards-Version: 4.6.2
+Homepage: https://github.com/phpDocumentor/GraphViz
+Vcs-Git: https://github.com/Vitexus/php-phpdocumentor-graphviz.git
+Rules-Requires-Root: no
+
+Package: php-phpdocumentor-graphviz
+Architecture: all
+Depends: ${misc:Depends}, php-cli | php, composer
+Description: GraphViz component for phpDocumentor
+ Provides a PHP abstraction over the GraphViz graph description language
+ for use with phpDocumentor.

@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+PKG_VERSION := $(shell dpkg-parsechangelog -S Version | sed 's/~.*//')
+PKG_SOURCE  := $(shell jq -r '.name' composer.json)
+
+%:
+	dh $@
+
+override_dh_auto_test:
+
+override_dh_install:
+	mkdir -p debian/php-phpdocumentor-graphviz/usr/share/php/phpDocumentor/GraphViz
+	cp -r src/phpDocumentor/GraphViz/. debian/php-phpdocumentor-graphviz/usr/share/php/phpDocumentor/GraphViz/
+	install -m 644 debian/autoload.php debian/php-phpdocumentor-graphviz/usr/share/php/phpDocumentor/GraphViz/autoload.php
+	sed -i "s|'unknown'|'$(PKG_SOURCE)'|" debian/php-phpdocumentor-graphviz/usr/share/php/phpDocumentor/GraphViz/autoload.php
+	sed -i "s|'0.0.0'|'$(PKG_VERSION)'|" debian/php-phpdocumentor-graphviz/usr/share/php/phpDocumentor/GraphViz/autoload.php
